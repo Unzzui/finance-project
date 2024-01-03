@@ -22,7 +22,7 @@ re_ = qs.reports.basic(returnss, display=True)
 re_1 = qs.reports.metrics(returnss, mode="full")
 cumulative_returns = qs.stats.compsum(returnss)
 
-ticker = "AAPL"
+ticker = "TSLA"
 volatility = qs.stats.rolling_volatility(returnss)
 volatility.dropna()
 
