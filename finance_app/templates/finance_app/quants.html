@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quants Analysis</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Include Apache ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+    <!-- Include your custom JavaScript file -->
+    {% load static %}
+    <script src="{% static 'js/financial_charts.js' %}"></script>
+    <link href="{% static 'css/custom-styles.css' %}" rel="stylesheet">
+
+</head>
+<style>
+    /* Estilos CSS personalizados */
+    /* Agrega tus estilos aquí */
+    .active {
+        background-color: #007bff;
+        color: #fff;
+    }
+</style>
+<body>
+    <div class="container mt-5">
+        <form id="tickerForm" method="get" class="mb-4">
+            <div class="form-group">
+                <label for="ticker" class="font-weight-bold">Choose a Ticker:</label>
+                <select name="ticker" id="ticker" class="form-control" onchange="submitForm()">
+                    {% for ticker in tickers %}
+                        <option value="{{ ticker }}" {% if ticker == selected_ticker %}selected{% endif %}>
+                            {{ ticker }}
+                        </option>
+                        
+                    {% endfor %}
+                </select>
+                <span id="selectedTicker" style="font-size: 22px; margin: 4px 0px; color: #20262E;"></span>
+
+            </div>
+            <!-- Botones del menú -->
+            <div class="btn-group" role="group">
+
+                <button type="button" class="btn custom-button active" onclick="changeSection('fundamentals')">Fundamentals Ratios</button>
+                <button type="button" class="btn custom-button" onclick="changeSection('quant')">Quant Analysis</button>
+                
+            </div>
+        </form>
+    
+        <h1 class="mb-4", id='pageTitle'>Quant Analysis for {{ selected_ticker }}</h1>
+    
+        <!-- Sección de Fundamentals Ratios -->
+        <div id="quantSection">
+            <div id="priceChart" style="width: 1200px;height:400px;"></div>
+        </div>
+        <div class="content-container">
+            <div id="charts-container">
+                <div id="cumulativeChart" class='charts' style="width: 620px;height:387px;"></div>
+            </div>
+            <div class="metrics-table"> <!-- Contenedor de la tabla -->
+                <h3>Key Performance Metrics</h3>
+                {{ table_quants|safe }}
+            </div>
+        </div>
+        <script>
+            // Variables globales para los datos de los gráficos
+
+            // Quants
+            let priceData = {{price|safe}}
+            let cumulativeData = {{cumulative_returns | safe}}
+            let currentSection = 'quant'; // Valor predeterminado
+
+            // Quants
+                  
+            // Función para mostrar Fundamentals Ratios
+            // Función para mostrar Fundamentals Ratios
+            function showQuantAnalysis() {
+                
+                document.getElementById('quantSection').style.display = 'block';
+
+                // Llama a la función para renderizar los gráficos con los datos actuales
+                renderQuantCharts(priceData, cumulativeData);
+
+                // Cambia el título y resalta el botón
+                document.getElementById('pageTitle').textContent = 'Quant Analysis for {{ selected_ticker }}';
+                document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.btn:nth-child(1)').classList.add('active');
+            }
+            function highlightButton(section) {
+                const buttons = document.querySelectorAll('.custom-button'); // Selecciona todos los botones personalizados
+                buttons.forEach(button => {
+                    if (button.getAttribute('onclick').includes(section)) {
+                        button.classList.add('active'); // Resalta el botón de la sección seleccionada
+                    } else {
+                        button.classList.remove('active'); // Quita el resaltado de los otros botones
+                    }
+                });
+            }
+            function changeSection(section) {
+                currentSection = section; 
+                // Cambia la sección actual
+                highlightButton(section); 
+                submitForm(); // Envía el formulario
+                // Resalta el botón correspondiente
+            }
+            
+            function highlightButton(section) {
+                const buttons = document.querySelectorAll('.custom-button'); // Selecciona todos los botones personalizados
+                buttons.forEach(button => {
+                    if (button.getAttribute('onclick').includes(section)) {
+                        button.classList.add('active'); // Resalta el botón de la sección seleccionada
+                    } else {
+                        button.classList.remove('active'); // Quita el resaltado de los otros botones
+                    }
+                });
+            }
+        
+
+            // Llama a la función para mostrar Fundamentals Ratios por defecto
+            showQuantAnalysis();
+
+            // Función para enviar el formulario al seleccionar un ticker
+            function submitForm() {
+                var selectedTicker = document.getElementById('ticker').value; // Obtiene el ticker seleccionado
+                var url = '';
+                if (currentSection === 'fundamentals') {
+                    url = '/fundamentals/?ticker=' + selectedTicker;
+                } else {
+                    url = '/quant-analysis/?ticker=' + selectedTicker;
+                }
+            
+                window.location.href = url;
+            }
+            highlightButton(currentSection);
+
+        </script>
+    </div>
+    
+</body>
+</html>
