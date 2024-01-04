@@ -8,9 +8,13 @@ body.active{
     color: #fff;
     
 }
+
+html {
+    scroll-behavior: smooth;
+}
 .custom-button {
-    font-size: 16px;
-    padding: 10px 20px;
+    font-size: 1em; /* en lugar de 16px */
+    padding: 0.625em 1.25em; /* en lugar de 10px 20px */
     border: none;
     border-radius: 5px;
     margin-right: 10px;
@@ -26,7 +30,7 @@ body.active{
 
 
 table td, .tables_ th {
-    padding: 0.75rem;
+    padding: 0.75rem; /* ya es relativo */
     vertical-align: top;
     border-top: 1px solid #dee2e6;
 }
@@ -96,15 +100,15 @@ form .form-group .form-control.small-form-control {
     border-radius: 160px;
     background: #fff;
     transition: 0.5s;
-    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.1),
-                inset 0 8px 8px rgba(0, 0, 0 ,0.1),
-                inset 0 -4px 4px rgba(0, 0, 0 ,0.1);
+    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.2),
+                inset 0 8px 8px rgba(0, 0, 0 ,0.2),
+                inset 0 -4px 4px rgba(0, 0, 0 ,0.2);
 }
 #toggle.active{
     background: #222;
-    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.1),
+    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.3),
     inset 0 2px 8px rgba(0, 0, 0 ,0.1),
-    inset 0 -4px 8px rgba(0, 0, 0 ,0.05);
+    inset 0 -4px 8px rgba(0, 0, 0 ,0.1);
 
 }
 
@@ -118,19 +122,20 @@ form .form-group .form-control.small-form-control {
     background: linear-gradient(to bottom , #eaeaea, #f9f9f9);
     border-radius: 50%;
     transform: scale(0.9);
-    box-shadow: inset 0 8px 20px rgba(0, 0, 0 ,0.1),
-    inset 0 4px 4px rgba(255, 255, 255 ,1),
-    inset 0 -4px 4px rgba(255, 255, 255 ,1);
+    box-shadow: inset 0 8px 10px rgba(0, 0, 0 ,0.2),
+    inset 0 4px 4px rgba(255, 255, 255 ,0.8),
+    inset 0 -4px 4px rgba(255, 255, 255 ,0.8);
     transition: 0.5s;
 }
 
 #toggle.active .indicator{
     left:35px;
     background: linear-gradient(to bottom, #444, #222);
-    box-shadow: inset 0 8px 10px rgba(0, 0, 0 ,0.5),
-    inset 0 4px 4px rgba(255, 255, 255 ,0.2),
-    inset 0 -4px 4px rgba(255, 255, 255 ,0.2);
+    box-shadow: inset 0 8px 10px rgba(0, 0, 0 ,0.6),
+    inset 0 4px 4px rgba(255, 255, 255 ,0.3),
+    inset 0 -4px 4px rgba(255, 255, 255 ,0.3);
 }
+
 
 /* CSS */
 /* CSS */
@@ -185,9 +190,9 @@ form .form-group .form-control.small-form-control {
 @keyframes blur {
     to {
         box-shadow:
-            0px 5px 50px -5px rgba(0, 0, 0, 0.1),
-            0px 0px 0 1px rgba(0, 0, 0, 0.3);
-        background: rgba(0, 0, 0, 0.3);
+            0px 5px 50px -5px rgba(0, 0, 0, 0.05),  /* Reducir la opacidad a 0.05 */
+            0px 0px 0 1px rgba(0, 0, 0, 0.15);  /* Reducir la opacidad a 0.15 */
+        background: rgba(0, 0, 0, 0.15);  /* Reducir la opacidad a 0.15 */
         backdrop-filter: blur(10px);
     }
 }

@@ -1,5 +1,3 @@
-/* index.css */
-
 
 /* Estilos generales de la página */
 body {
@@ -67,7 +65,6 @@ button.btn-primary:hover {
     background-color: #0056b3; /* Cambia el color al pasar el mouse */
 }
 
-
 #toggle{
     position: absolute;
     top: 10px;
@@ -78,15 +75,15 @@ button.btn-primary:hover {
     border-radius: 160px;
     background: #fff;
     transition: 0.5s;
-    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.1),
-                inset 0 8px 8px rgba(0, 0, 0 ,0.1),
-                inset 0 -4px 4px rgba(0, 0, 0 ,0.1);
+    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.2),
+                inset 0 8px 8px rgba(0, 0, 0 ,0.2),
+                inset 0 -4px 4px rgba(0, 0, 0 ,0.2);
 }
 #toggle.active{
     background: #222;
-    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.1),
+    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.3),
     inset 0 2px 8px rgba(0, 0, 0 ,0.1),
-    inset 0 -4px 8px rgba(0, 0, 0 ,0.05);
+    inset 0 -4px 8px rgba(0, 0, 0 ,0.1);
 
 }
 
@@ -100,18 +97,16 @@ button.btn-primary:hover {
     background: linear-gradient(to bottom , #eaeaea, #f9f9f9);
     border-radius: 50%;
     transform: scale(0.9);
-    box-shadow: inset 0 8px 20px rgba(0, 0, 0 ,0.1),
-    inset 0 4px 4px rgba(255, 255, 255 ,1),
-    inset 0 -4px 4px rgba(255, 255, 255 ,1);
+    box-shadow: inset 0 8px 10px rgba(0, 0, 0 ,0.2),
+    inset 0 4px 4px rgba(255, 255, 255 ,0.8),
+    inset 0 -4px 4px rgba(255, 255, 255 ,0.8);
     transition: 0.5s;
 }
 
 #toggle.active .indicator{
     left:35px;
     background: linear-gradient(to bottom, #444, #222);
-    box-shadow: inset 0 8px 10px rgba(0, 0, 0 ,0.5),
-    inset 0 4px 4px rgba(255, 255, 255 ,0.2),
-    inset 0 -4px 4px rgba(255, 255, 255 ,0.2);
+    box-shadow: inset 0 8px 10px rgba(0, 0, 0 ,0.6),
+    inset 0 4px 4px rgba(255, 255, 255 ,0.3),
+    inset 0 -4px 4px rgba(255, 255, 255 ,0.3);
 }
-
-
