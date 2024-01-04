@@ -4,5 +4,6 @@ APScheduler==3.10.4
 QuantStats==0.0.62
 Django==4.2.9
 psycopg2-binary==2.9.9
+psycopg2==2.9.3
 requests==2.31.0
 sqlparse==0.4.3
