@@ -1,8 +1,12 @@
-@media (prefers-color-scheme: dark){
-    body{
-        background-color: black;
-        color: white;
-    }
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    transition: 0.5s;
+}
+body.active{
+    background: #2b2b2b;
+    color: #fff;
+    
 }
 .custom-button {
     font-size: 16px;
@@ -12,11 +16,25 @@
     margin-right: 10px;
     cursor: pointer;
     background-color: #fff;
-    color: #333;
     transition: background-color 0.3s, color 0.3s;
 }
 
+.tables_ thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
 
+
+table td, .tables_ th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.tables_ {
+    width: 100%;
+    margin-bottom: 1rem;
+}
 .title_1{
     text-align: center;
     margin-bottom: 50px;
@@ -27,7 +45,6 @@
 /* Estilo para el botón activo */
 .custom-button.active {
     background-color: #007bff;
-    color: #fff;
 }
 
 /* Elimina el borde predeterminado de los botones en el grupo de botones */
@@ -38,13 +55,11 @@
 /* Añade un efecto de transición suave cuando el mouse está sobre los botones */
 .custom-button:hover {
     background-color: #007bff;
-    color: #fff;
 }
 
 /* Añade un efecto de transición suave cuando el mouse está sobre el botón activo */
 .custom-button.active:hover {
     background-color: #007bff;
-    color: #fff;
 }
 .content-container {
     display: flex;
@@ -64,10 +79,115 @@
 }
 .metrics-table, .metrics-table * {
     flex-grow: 1; /* Permite que el contenedor de la tabla crezca para ocupar el espacio disponible */
-    color: white;
 }
 
 form .form-group .form-control.small-form-control {
     width: 150px;
 }
 
+
+#toggle{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: block;
+    width: 70px;
+    height: 35px;
+    border-radius: 160px;
+    background: #fff;
+    transition: 0.5s;
+    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.1),
+                inset 0 8px 8px rgba(0, 0, 0 ,0.1),
+                inset 0 -4px 4px rgba(0, 0, 0 ,0.1);
+}
+#toggle.active{
+    background: #222;
+    box-shadow: inset 0 8px 8px rgba(0, 0, 0 ,0.1),
+    inset 0 2px 8px rgba(0, 0, 0 ,0.1),
+    inset 0 -4px 8px rgba(0, 0, 0 ,0.05);
+
+}
+
+#toggle .indicator
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(to bottom , #eaeaea, #f9f9f9);
+    border-radius: 50%;
+    transform: scale(0.9);
+    box-shadow: inset 0 8px 20px rgba(0, 0, 0 ,0.1),
+    inset 0 4px 4px rgba(255, 255, 255 ,1),
+    inset 0 -4px 4px rgba(255, 255, 255 ,1);
+    transition: 0.5s;
+}
+
+#toggle.active .indicator{
+    left:35px;
+    background: linear-gradient(to bottom, #444, #222);
+    box-shadow: inset 0 8px 10px rgba(0, 0, 0 ,0.5),
+    inset 0 4px 4px rgba(255, 255, 255 ,0.2),
+    inset 0 -4px 4px rgba(255, 255, 255 ,0.2);
+}
+
+/* CSS */
+/* CSS */
+#header-nav {
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    padding: 0.8rem;
+}
+
+#header-nav .container_2 {
+    display: flex;
+    max-width: 80rem; /* Aproximadamente equivalente a max-w-7xl en Tailwind */
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+}
+
+
+#header-nav .container_2 nav {
+    display: none;
+    flex-grow: 1;
+    flex-basis: 0;
+    width: 100%;
+    gap: 0 1.5rem;
+    font-size: 1.125rem; /* Aproximadamente equivalente a text-lg en Tailwind */
+    justify-content: center;
+    font-weight: 500;
+}
+
+#header-nav .container_2 nav a {
+    color: inherit;
+}
+
+#header-nav .container_2 nav a:hover {
+    text-decoration: none;
+}
+
+@media (min-width: 768px) {
+    #header-nav .container_2 nav {
+        display: flex;
+    }
+}
+
+#header-nav {
+    animation: blur linear both;
+    animation-timeline: scroll();
+    animation-range: 0 900px;
+  }
+
+@keyframes blur {
+    to {
+        box-shadow:
+            0px 5px 50px -5px rgba(0, 0, 0, 0.1),
+            0px 0px 0 1px rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+    }
+}

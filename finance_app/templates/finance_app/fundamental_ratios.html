@@ -6,7 +6,7 @@
 
     <!-- Include Apache ECharts -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Include your custom JavaScript file -->
     {% load static %}
     <script src="{% static 'js/financial_charts.js' %}"></script>
@@ -23,6 +23,41 @@
     }
 </style>
 <body>
+    <header id="header-nav">
+        <div class="container_2">
+
+
+            <!-- Menú de navegación para pantallas grandes -->
+            <nav>
+                <a href="/">Inicio</a>
+                <a href="/fundamentals">Fundamentals</a>
+                <a href="/quant">Quant</a>
+            </nav>
+        </div>
+
+    <div id="toggle">
+        <i class="indicator"></i>
+    </div>
+    <script>
+        const body = document.querySelector("body");
+        const toggle = document.getElementById("toggle");
+
+        // Al cargar la página, verifica si el toggle estaba activo la última vez
+        if (localStorage.getItem("toggleActive") === "true") {
+            toggle.classList.add("active");
+            body.classList.add("active");
+        }
+
+        toggle.onclick = function () {
+            toggle.classList.toggle("active");
+            body.classList.toggle("active");
+
+            // Al hacer clic en el toggle, guarda su estado actual en localStorage
+            localStorage.setItem("toggleActive", toggle.classList.contains("active"));
+        
+        };
+    </script>
+    </header>
      <div class="container mt-5">
         <form id="tickerForm" method="get" class="mb-4">
             <div class="form-group">
@@ -86,6 +121,10 @@
                 document.getElementById('charts-container').style.display = 'block';
 
                 // Asegúrate de que los datos existen antes de intentar renderizar los gráficos
+                if (localStorage.getItem("toggleActive") === "true") {
+                    toggle.classList.add("active");
+                    body.classList.add("active");
+                }
                 renderCharts(
                     revenueData,
                     grossMarginData,
@@ -96,7 +135,23 @@
                     roicData,
                     fcfData,
                     qrData);
-
+                    toggle.onclick = function () {
+                    toggle.classList.toggle("active");
+                    body.classList.toggle("active");
+                
+                    // Al hacer clic en el toggle, guarda su estado actual en localStorage
+                    localStorage.setItem("toggleActive", toggle.classList.contains("active"));
+                    renderCharts(
+                        revenueData,
+                        grossMarginData,
+                        operatingMarginData,
+                        profitMarginData,
+                        roeData,
+                        roaData,
+                        roicData,
+                        fcfData,
+                        qrData);
+                    };
                 // Cambia el título y resalta el botón
                 document.getElementById('pageTitle').textContent = 'Fundamentals Ratios for {{ selected_ticker }}';
                 document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
@@ -141,6 +196,5 @@
 
         </script>
     </div>
-    
 </body>
 </html>

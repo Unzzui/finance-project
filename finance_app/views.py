@@ -156,7 +156,7 @@ def fundamentals_view(request):
 
     # Crear la tabla HTML
     # Añadir filas a la tabla para cada métrica, incluyendo Quick Ratio
-    table_html = "<table class='table'><thead><tr><th>Metric</th><th>Actual</th><th>Promedio</th></tr></thead><tbody>"
+    table_html = "<table class='tables_'><thead><tr><th>Metric</th><th>Actual</th><th>Promedio</th></tr></thead><tbody>"
 
     for metric_name, metric_data in [
         ("Gross Margin", gross_margin),
@@ -403,7 +403,7 @@ def quants_view(request):
     table_metrics = table_quant(returns_for_table, ticker_seleccionado)
     table_metrics = format_rows(table_metrics)
     table_quants = table_metrics.to_html(
-        classes="table", border="0"
+        classes="tables_", border="0"
     )  # Aplica la función de formateo a las filas especificadas
 
     context = {

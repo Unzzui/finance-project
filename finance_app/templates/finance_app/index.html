@@ -1,31 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Analysis - Home</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    {% load static %}
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Financial Analysis - Home</title>
+		<link
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		{% load static %}
 
-    <link href="{% static 'css/index.css' %}" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h1>Análisis de Acciones: Value Investing y Quant Analysis</h1>
-        <p>Explora el emocionante mundo del análisis de acciones y lleva tu estrategia de inversión al siguiente nivel. Descubre cómo el Value Investing puede ayudarte a encontrar oportunidades ocultas y cómo el Quant Analysis te permite aprovechar los datos para tomar decisiones informadas. Accede a información detallada de más de 10,000 acciones y fondos, incluyendo las empresas líderes del S&P 500. Potencia tus inversiones y toma decisiones más inteligentes. ¡Comienza hoy mismo!</p>
+		<link href="{% static 'css/index.css' %}" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="toggle">
+			<i class="indicator"></i>
+		</div>
+		<script>
+			const body = document.querySelector("body");
+			const toggle = document.getElementById("toggle");
 
-        <form id="tickerForm" action="{% url 'redirect_to_analysis' %}" method="get">
-            <div class="form-group">
-                <label for="ticker">Choose a Ticker:</label>
-                <select name="ticker" id="ticker" class="form-control">
-                    {% for ticker in tickers %}
-                        <option value="{{ ticker }}">{{ ticker }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        
-            <button type="submit" class="btn btn-primary">Go</button>
-        </form>
-    </div>
-</body>
+			// Al cargar la página, verifica si el toggle estaba activo la última vez
+			if (localStorage.getItem("toggleActive") === "true") {
+				toggle.classList.add("active");
+				body.classList.add("active");
+			}
+
+			toggle.onclick = function () {
+				toggle.classList.toggle("active");
+				body.classList.toggle("active");
+
+				// Al hacer clic en el toggle, guarda su estado actual en localStorage
+				localStorage.setItem(
+					"toggleActive",
+					toggle.classList.contains("active")
+				);
+			};
+		</script>
+
+		<div class="container">
+			<h1>Análisis de Acciones: Value Investing y Quant Analysis</h1>
+			<p>
+				Explora el emocionante mundo del análisis de acciones y lleva tu
+				estrategia de inversión al siguiente nivel. Descubre cómo el Value
+				Investing puede ayudarte a encontrar oportunidades ocultas y cómo el
+				Quant Analysis te permite aprovechar los datos para tomar decisiones
+				informadas. Accede a información detallada de más de 10,000 acciones y
+				fondos, incluyendo las empresas líderes del S&P 500. Potencia tus
+				inversiones y toma decisiones más inteligentes. ¡Comienza hoy mismo!
+			</p>
+
+			<form
+				id="tickerForm"
+				action="{% url 'redirect_to_analysis' %}"
+				method="get"
+			>
+				<div class="form-group">
+					<label for="ticker">Choose a Ticker:</label>
+					<select name="ticker" id="ticker" class="form-control">
+						{% for ticker in tickers %}
+						<option value="{{ ticker }}">{{ ticker }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Go</button>
+			</form>
+		</div>
+	</body>
 </html>

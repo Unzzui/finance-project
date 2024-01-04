@@ -1,17 +1,18 @@
-// financial_charts.js
 function initChartPercentage(chartDivId, data, title) {
 	var chartDom = document.getElementById(chartDivId);
 	var myChart = echarts.init(chartDom);
 	var option;
+	var isDarkMode = localStorage.getItem("toggleActive") === "true";
+	var titleColor = isDarkMode ? "white" : "black";
 
 	option = {
 		title: {
 			text: title,
 			left: "center",
 			textStyle: {
-				color: "white",
 				fontSize: 18,
 				fontWeight: "bold",
+				color: titleColor,
 			},
 		},
 		tooltip: {
@@ -50,22 +51,26 @@ function initChartPercentage(chartDivId, data, title) {
 			data: Object.keys(data),
 			axisLine: {
 				lineStyle: {
-					color: "white",
+					color: titleColor,
 				},
+			},
+			axisLabel: {
+				color: titleColor,
 			},
 		},
 		yAxis: {
 			type: "value",
 			axisLabel: {
 				formatter: "{value}%",
-				textStyle: {
-					color: "white",
-				},
+				color: titleColor,
 			},
 			axisLine: {
 				lineStyle: {
-					color: "white",
+					color: titleColor,
 				},
+			},
+			axisLabel: {
+				color: titleColor,
 			},
 			splitLine: {
 				lineStyle: {
@@ -112,15 +117,17 @@ function initChartNumber(chartDivId, data, title) {
 	var chartDom = document.getElementById(chartDivId);
 	var myChart = echarts.init(chartDom);
 	var option;
+	var isDarkMode = localStorage.getItem("toggleActive") === "true";
+	var titleColor = isDarkMode ? "white" : "black";
 
 	option = {
 		title: {
 			text: title,
 			left: "center",
 			textStyle: {
-				color: "white",
 				fontSize: 18,
 				fontWeight: "bold",
+				color: titleColor,
 			},
 		},
 		tooltip: {
@@ -151,23 +158,20 @@ function initChartNumber(chartDivId, data, title) {
 			data: Object.keys(data),
 			axisLine: {
 				lineStyle: {
-					color: "white",
+					color: titleColor,
 				},
+			},
+			axisLabel: {
+				color: titleColor,
 			},
 		},
 		yAxis: {
 			type: "value",
 			axisLabel: {
 				formatter: "{value}",
-				textStyle: {
-					color: "white",
-				},
+				color: titleColor,
 			},
-			axisLine: {
-				lineStyle: {
-					color: "white",
-				},
-			},
+			axisLine: {},
 			splitLine: {
 				lineStyle: {
 					type: "dashed",
@@ -214,7 +218,8 @@ function initChartMoney(chartDivId, data, title) {
 	var myChart = echarts.init(chartDom);
 	var option;
 	var ticker = document.getElementById("ticker").value; // Obtiene el ticker seleccionado
-
+	var isDarkMode = localStorage.getItem("toggleActive") === "true";
+	var titleColor = isDarkMode ? "white" : "black";
 	function currencyFormatter(value) {
 		// Format as currency (e.g., 1,234,567$)
 		return value.toLocaleString("en-US", { maximumFractionDigits: 2 }) + "$";
@@ -225,9 +230,9 @@ function initChartMoney(chartDivId, data, title) {
 			text: title,
 			left: "center",
 			textStyle: {
-				color: "white",
 				fontSize: 18,
 				fontWeight: "bold",
+				color: titleColor,
 			},
 		},
 		tooltip: {
@@ -266,22 +271,25 @@ function initChartMoney(chartDivId, data, title) {
 			data: Object.keys(data),
 			axisLine: {
 				lineStyle: {
-					color: "white",
+					color: titleColor,
 				},
+			},
+			axisLabel: {
+				color: titleColor,
 			},
 		},
 		yAxis: {
 			type: "value",
 			axisLabel: {
 				formatter: "{value}$",
-				textStyle: {
-					color: "white",
-				},
 			},
 			axisLine: {
 				lineStyle: {
-					color: "white",
+					color: titleColor,
 				},
+			},
+			axisLabel: {
+				color: titleColor,
 			},
 			splitLine: {
 				lineStyle: {
@@ -330,7 +338,8 @@ function stockPriceChart(chartDivId, data, title) {
 	var myChart = echarts.init(chartDom);
 	var option;
 	var ticker = document.getElementById("ticker").value; // Obtiene el ticker seleccionado
-
+	var isDarkMode = localStorage.getItem("toggleActive") === "true";
+	var titleColor = isDarkMode ? "white" : "black";
 	function currencyFormatter(value) {
 		// Format as currency (e.g., 1,234,567$)
 		return value.toLocaleString("en-US", { maximumFractionDigits: 2 }) + "$";
@@ -341,9 +350,9 @@ function stockPriceChart(chartDivId, data, title) {
 			text: title + ticker,
 			left: "center",
 			textStyle: {
-				color: "#white",
 				fontSize: 18,
 				fontWeight: "bold",
+				color: titleColor,
 			},
 		},
 
@@ -382,23 +391,20 @@ function stockPriceChart(chartDivId, data, title) {
 			boundaryGap: false,
 			data: Object.keys(data),
 			axisLine: {
-				lineStyle: {
-					color: "white",
-				},
+				color: titleColor,
+			},
+			axisLabel: {
+				color: titleColor,
 			},
 		},
 		yAxis: {
 			type: "value",
 			axisLabel: {
 				formatter: "{value}$",
-				textStyle: {
-					color: "white",
-				},
+				color: titleColor,
 			},
 			axisLine: {
-				lineStyle: {
-					color: "white",
-				},
+				color: titleColor,
 			},
 			splitLine: {
 				lineStyle: {
