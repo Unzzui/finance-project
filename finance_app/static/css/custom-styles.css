@@ -196,3 +196,56 @@ form .form-group .form-control.small-form-control {
         backdrop-filter: blur(10px);
     }
 }
+.custom-footer {
+    margin-top: 50px;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0; /* Ajusta este valor según tus necesidades */
+    font-size: small;
+    display: flex; /* Añade esto */
+    align-items: center; /* Añade esto */
+    justify-content: center; /* Añade esto */
+    flex-direction: column; /* Añade esto si el contenido debe estar en columnas */
+    border-top: 2px outset rgba(0, 0, 0, 0.1); /* Añade esto */
+
+}
+
+body.active .custom-footer {
+    border-top: 2px outset rgba(255, 255, 255, 0.1);
+}
+
+.custom-footer hr {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.custom-footer .flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.custom-footer a svg {
+    height: 24px;
+    width: 24px;
+    fill: inherit;
+}
+
+body.active .custom-footer a svg{
+    fill: #fff;
+}
+
+.custom-footer a {
+    margin-left: 16px;
+}
+@media (min-width: 640px) {
+    .custom-footer hr {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .custom-footer .flex-container {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+}
