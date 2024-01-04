@@ -19,7 +19,6 @@ from django.shortcuts import redirect
 from django.utils.html import format_html
 import os
 from django.core.cache import cache
-from datetime import datetime, timedelta
 from apscheduler.schedulers.background import BackgroundScheduler
 
 # Create your views here.
