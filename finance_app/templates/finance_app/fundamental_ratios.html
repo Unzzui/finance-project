@@ -12,7 +12,6 @@
     <!-- Include your custom JavaScript file -->
     {% load static %}
     <script src="{% static 'js/financial_charts.js' %}"></script>
-    
     <link href="{% static 'css/custom-styles.css' %}" rel="stylesheet">
     {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% endcomment %}
 </head>
@@ -35,54 +34,8 @@
     <div id="toggle">
         <i class="indicator"></i>
     </div>
-    <script>
-        const body = document.querySelector("body");
-        const toggle = document.getElementById("toggle");
+    <script src="{% static 'js/toggle.js' %}"></script>
 
-        // Al cargar la página, verifica si el toggle estaba activo la última vez
-        var isDarkMode = localStorage.getItem("toggleActive") === "true";
-        if (isDarkMode) {
-            toggle.classList.add("active");
-            body.classList.add("active");
-        }
-
-        toggle.onclick = function () {
-            toggle.classList.toggle("active");
-            body.classList.toggle("active");
-
-            // Al hacer clic en el toggle, guarda su estado actual en localStorage
-            localStorage.setItem(
-                "toggleActive",
-                toggle.classList.contains("active")
-            );
-        };
-
-        // Escucha los cambios en prefers-color-scheme
-        window
-            .matchMedia("(prefers-color-scheme: dark)")
-            .addEventListener("change", (e) => {
-                var newColorScheme = e.matches ? "dark" : "light";
-
-                // Si el nuevo esquema de colores es oscuro y el toggle no está activo, activa el toggle
-                if (
-                    newColorScheme === "dark" &&
-                    !toggle.classList.contains("active")
-                ) {
-                    toggle.classList.add("active");
-                    body.classList.add("active");
-                    localStorage.setItem("toggleActive", true);
-                }
-                // Si el nuevo esquema de colores es claro y el toggle está activo, desactiva el toggle
-                else if (
-                    newColorScheme === "light" &&
-                    toggle.classList.contains("active")
-                ) {
-                    toggle.classList.remove("active");
-                    body.classList.remove("active");
-                    localStorage.setItem("toggleActive", false);
-                }
-            });
-    </script>
     </header>
      <div class="container mt-5">
         <form id="tickerForm" method="get" class="mb-4">
@@ -162,88 +115,10 @@
             let roicData = {{ roic|safe }};
             let qrData = {{ qr|safe }};
             let fcfData = {{ fcf|safe }};
-            // Quants
-            {% comment %} console.log(document.getElementById('grossMarginChart'))            // Función para mostrar Fundamentals Ratios {% endcomment %}
-            // Función para mostrar Fundamentals Ratios
-
-            function showFundamentals() {
-                document.getElementById('charts-container').style.display = 'block';
-
-                // Asegúrate de que los datos existen antes de intentar renderizar los gráficos
-                if (localStorage.getItem("toggleActive") === "true") {
-                    toggle.classList.add("active");
-                    body.classList.add("active");
-                }
-                renderCharts(
-                    revenueData,
-                    grossMarginData,
-                    operatingMarginData,
-                    profitMarginData,
-                    roeData,
-                    roaData,
-                    roicData,
-                    fcfData,
-                    qrData);
-                    toggle.onclick = function () {
-                    toggle.classList.toggle("active");
-                    body.classList.toggle("active");
-                
-                    // Al hacer clic en el toggle, guarda su estado actual en localStorage
-                    localStorage.setItem("toggleActive", toggle.classList.contains("active"));
-                    renderCharts(
-                        revenueData,
-                        grossMarginData,
-                        operatingMarginData,
-                        profitMarginData,
-                        roeData,
-                        roaData,
-                        roicData,
-                        fcfData,
-                        qrData);
-                    };
-                // Cambia el título y resalta el botón
-                document.getElementById('pageTitle').textContent = 'Fundamentals Ratios for {{ selected_ticker }}';
-                document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
-                document.querySelector('.btn:nth-child(1)').classList.add('active');
-            }
-
-            function highlightButton(section) {
-                const buttons = document.querySelectorAll('.custom-button'); // Selecciona todos los botones personalizados
-                buttons.forEach(button => {
-                    if (button.getAttribute('onclick').includes(section)) {
-                        button.classList.add('active'); // Resalta el botón de la sección seleccionada
-                    } else {
-                        button.classList.remove('active'); // Quita el resaltado de los otros botones
-                    }
-                });
-            }
-            function changeSection(section) {
-                currentSection = section; 
-                // Cambia la sección actual
-                highlightButton(section); 
-                submitForm(); // Envía el formulario
-// Resalta el botón correspondiente
-            }
-        
-            // Llama a la función para mostrar Fundamentals Ratios por defecto
-            showFundamentals();
-
-            // Función para enviar el formulario al seleccionar un ticker
-            function submitForm() {
-                var selectedTicker = document.getElementById('ticker').value; // Obtiene el ticker seleccionado
-            
-                var url = '';
-                if (currentSection === 'fundamentals') {
-                    url = '/fundamentals/?ticker=' + selectedTicker;
-                } else {
-                    url = '/quant-analysis/?ticker=' + selectedTicker;
-                }
-            
-                window.location.href = url;
-            }
-            highlightButton(currentSection);
+            let selectedTicker = "{{ selected_ticker }}";
 
         </script>
+        <script src="{% static 'js/showFundamental.js' %}"></script>
  
 </body>
 </html>
