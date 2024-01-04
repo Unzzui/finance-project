@@ -1,6 +1,4 @@
-import matplotlib.pyplot as plt
 import json
-import matplotlib.ticker as mtick
 import os
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -190,3 +188,62 @@ def quick_ratio(datos_financieros, statement_type):
                 qr[year] = (current_assets - inventory) / current_liabilities
 
     return qr
+
+
+def calcular_leverage(datos_financieros, statement_type):
+    leverage = {}
+    balance_key = f"Balance_Sheet_Statement_{statement_type}"
+
+    if balance_key in datos_financieros:
+        for balance_sheet_statement in datos_financieros[balance_key]:
+            year = balance_sheet_statement["Concepto"]
+            try:
+                total_assets = balance_sheet_statement["Total Assets"]
+            except KeyError:
+                total_assets = 0
+            try:
+                total_liabilities = balance_sheet_statement["Total Liabilities"]
+            except KeyError:
+                total_liabilities = 0
+            # Calcula el leverage directamente sin un bucle anidado
+            if total_assets > 0:  # Asegura que no hay división por cero
+                leverage[year] = total_liabilities / total_assets
+
+    return leverage
+
+
+def calcular_estructura_capital(datos_financieros, statement_type):
+    # Inicializa un diccionario vacío para almacenar la estructura de capital
+    estructura_capital = {}
+    # Crea una clave para buscar en los datos financieros
+    balance_key = f"Balance_Sheet_Statement_{statement_type}"
+
+    # Verifica si la clave existe en los datos financieros
+    if balance_key in datos_financieros:
+        # Itera sobre cada declaración de balance en los datos financieros
+        for balance_sheet_statement in datos_financieros[balance_key]:
+            # Obtiene el año de la declaración de balance
+            year = balance_sheet_statement["Concepto"]
+            # Intenta obtener la deuda total, si no existe, se establece en 0
+            try:
+                total_debt = balance_sheet_statement["Total Debt"]
+            except KeyError:
+                total_debt = 0
+            # Intenta obtener los activos totales, si no existen, se establecen en 0
+            try:
+                total_assets = balance_sheet_statement["Total Assets"]
+            except KeyError:
+                total_assets = 0
+            # Intenta obtener el patrimonio de los accionistas, si no existe, se establece en 0
+            try:
+                shareholders_equity = balance_sheet_statement["Shareholders' Equity"]
+            except KeyError:
+                shareholders_equity = 0
+            # Calcula la estructura de capital si los activos totales son mayores que 0 para evitar la división por cero
+            if total_assets > 0:
+                estructura_capital[year] = (
+                    total_debt + shareholders_equity
+                ) / total_assets
+
+    # Devuelve la estructura de capital
+    return estructura_capital

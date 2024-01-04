@@ -61,17 +61,14 @@ function initChartPercentage(chartDivId, data, title) {
 		yAxis: {
 			type: "value",
 			axisLabel: {
-				formatter: "{value}%",
-				color: titleColor,
-			},
-			axisLine: {
-				lineStyle: {
-					color: titleColor,
+				formatter: function (value) {
+					// Formatea el valor del eje y aquí
+					return value.toFixed(2) + "%";
 				},
-			},
-			axisLabel: {
 				color: titleColor,
 			},
+			axisLine: {},
+
 			splitLine: {
 				lineStyle: {
 					type: "dashed",
@@ -137,6 +134,14 @@ function initChartNumber(chartDivId, data, title) {
 				label: {
 					backgroundColor: "#6a7985",
 				},
+			},
+			formatter: function (params) {
+				return params
+					.map((param) => {
+						const value = param.value.toFixed(2); // Assuming value is a number
+						return `${param.axisValueLabel}: ${value}`;
+					})
+					.join("<br/>");
 			},
 		},
 		toolbox: {
@@ -394,6 +399,7 @@ function stockPriceChart(chartDivId, data, title) {
 				color: titleColor,
 			},
 			axisLabel: {
+				formatter: "{value}$",
 				color: titleColor,
 			},
 		},
